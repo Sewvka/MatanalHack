@@ -17,11 +17,12 @@ def convert_char(c):
 
 
 def main():
-    l = ''
+    l = '_'
     while True:
 
         data = pyperclip.waitForNewPaste()
-
+        if data == '':
+            continue
         if data != l:
             l = data
 
