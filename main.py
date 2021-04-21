@@ -8,6 +8,8 @@ print("((((((((((((((((/(((////////*//////*****/*****//*/*/////////////((((((((/
 
 def convert_char(c):
     o = ord(c)
+    if c == '±':
+        return c
     if 0xa0 <= o <= 0xff:
         o -= 0x10
     if 0 <= o < 256:
@@ -34,6 +36,13 @@ def main():
                     continue
                 if (l[i] == '\r') or (l[i] == '\n'):
                     outstr.append(' ')
+                    continue
+                if l[i] == '6' and (i+1) < length and l[i+1] == '=':
+                    outstr.append('≠')
+                    i+=1
+                    continue
+                if l[i]=='=' and (i-1) > 0 and l[i-1] == '6':
+                    i+=1
                     continue
                 outstr.append(convert_char(l[i]))
             pyperclip.copy(''.join(outstr))
